@@ -7,7 +7,7 @@ let app = new Vue({
         altText: 'A pair of shocks',
         link: 'https://www.google.es',
         inventory: 100,
-        onSale: true,
+        onSale: false,
         details: ["80% cotton", "20% polyester", "Gender-neutral"],
         variants: [
             {
@@ -21,7 +21,6 @@ let app = new Vue({
                 variantImage: "./assets/vmSocks-blue-onWhite.jpg"
             }
         ],
-        sizes: ["xs", "s", "m", "l", "xl"],
         cart: 0
     },
     methods: {

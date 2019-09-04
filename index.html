@@ -28,7 +28,7 @@
                 <!-- Conditional rendering -->
                 <p v-if="inventory > 10">In Stock</p>
                 <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
-                <p v-else>Out of Stock</p>
+                <p v-else :class="{line: !onSale}">Out of Stock</p>
                 
                 <!-- Toggle example -->
                 <p v-show="onSale">On Sale!</p>
@@ -37,14 +37,23 @@
                 <ul>
                     <li v-for="detail in details">{{ detail }}</li>
                 </ul>
-                <div v-for="variant in variants" :key="variant.variantId">
-                    <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }}</p>
+                <div v-for="variant in variants" 
+                    class="color-box"
+                    :key="variant.variantId"
+                    :style="{ backgroundColor: variant.variantColor}"
+                    @mouseover="updateProduct(variant.variantImage)"
+                    >
                 </div>
-                <ul>
-                    <li v-for="size in sizes">{{ size }}</li>
-                </ul>
-                <button v-on:click="addToCart">Add to cart</button>
-                <button v-on:click="subtractToCart">Subtract to cart</button>
+                
+                <button v-on:click="addToCart"
+                    :disabled="!onSale"
+                    :class="{disabledButton: !onSale}"
+                    >Add to cart</button>
+                <button @click="subtractToCart"
+                    :disabled="!onSale"
+                    :class="{disabledButton: !onSale}"
+                    >Subtract to cart</button>
+                
                 <div class="cart">
                     <p>Cart({{ cart }})</p>
                 </div>
