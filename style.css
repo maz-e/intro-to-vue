@@ -90,6 +90,6 @@ body {
     text-decoration: underline;
   }
 
-  .line {
+  .outOfStock {
     text-decoration: line-through;
   }
