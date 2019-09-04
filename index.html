@@ -13,46 +13,31 @@
     <div id="app">
         <div class="product">
             <div class="product-image">
-                <!-- Data binding -->
-                <!-- <img v-bind:src="image" v-bind:alt="altText"> -->
-                
-                <!-- Shorthand for v-bind -->
                 <img :src="image" :alt="altText">
             </div>
+
             <div class="product-info">
-                <a :href="link">
-                    <h1>{{ product }}</h1>
-                </a>
+                <h1>{{ title }}</h1>
                 <p>{{ description }}</p>
                 
-                <!-- Conditional rendering -->
-                <p v-if="inventory > 10">In Stock</p>
-                <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
-                <p v-else :class="{line: !onSale}">Out of Stock</p>
-                
-                <!-- Toggle example -->
-                <p v-show="onSale">On Sale!</p>
+                <p v-if="inStock">In Stock</p>
+                <p v-else :class="{outOfStock: !inStock}">Out of Stock</p>
 
-                <!-- List rendering -->
                 <ul>
                     <li v-for="detail in details">{{ detail }}</li>
                 </ul>
-                <div v-for="variant in variants" 
+                <div v-for="(variant, index) in variants" 
                     class="color-box"
                     :key="variant.variantId"
                     :style="{ backgroundColor: variant.variantColor}"
-                    @mouseover="updateProduct(variant.variantImage)"
+                    @mouseover="updateProduct(index)"
                     >
                 </div>
                 
                 <button v-on:click="addToCart"
-                    :disabled="!onSale"
-                    :class="{disabledButton: !onSale}"
+                    :disabled="!inStock"
+                    :class="{disabledButton: !inStock}"
                     >Add to cart</button>
-                <button @click="subtractToCart"
-                    :disabled="!onSale"
-                    :class="{disabledButton: !onSale}"
-                    >Subtract to cart</button>
                 
                 <div class="cart">
                     <p>Cart({{ cart }})</p>
