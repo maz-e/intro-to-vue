@@ -74,6 +74,16 @@ body {
     height: 25px;
     margin-bottom: 20px;
   }
+
+  .inputRadio {
+    margin-bottom: 20px;
+  }
+
+  .inputRadio > input {
+    width: auto;
+    height: 15px;
+    margin: 0;
+  }
   
   textarea {
     width: 100%;
